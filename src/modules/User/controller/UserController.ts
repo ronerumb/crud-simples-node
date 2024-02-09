@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import {z} from 'zod';
+import { userService } from '../service/UserService';
 
 class UserController{
 
@@ -17,6 +18,19 @@ class UserController{
         } catch (err:any) {
             return res.status(400).json({
                 error : err.errors
+            })
+            
+        }
+
+        try {
+            return res.json({
+                message : 'Incluido com sucesso',
+                data : await userService.create(name,email,password),
+            })
+            
+        } catch (err:any) {
+            return res.status(400).json({
+                message : err.errors,
             })
             
         }
