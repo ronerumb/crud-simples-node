@@ -23,6 +23,7 @@ class UserController{
         }
 
         try {
+            
             return res.json({
                 message : 'Incluido com sucesso',
                 data : await userService.create(name,email,password),
@@ -30,7 +31,7 @@ class UserController{
             
         } catch (err:any) {
             return res.status(400).json({
-                message : err.errors,
+                error: err.message,
             })
             
         }
